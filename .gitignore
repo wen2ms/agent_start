@@ -1,2 +1,5 @@
 # Environment
 .venv
+
+# Completion content
+openai_start_response.md
