@@ -5,7 +5,7 @@ from openai.types.chat import ChatCompletionMessageParam
 
 client = OpenAI(base_url="https://ws-yi9oakgdflk8zstn.cn-beijing.maas.aliyuncs.com/compatible-mode/v1")
 messages: list[ChatCompletionMessageParam] = [
-    {"role": "system", "content": "You are a Math expert."},
+    {"role": "system", "content": "You are a mathematics expert."},
     {"role": "user", "content": "Hello, what can you help me with?"},
     {
         "role": "assistant",
