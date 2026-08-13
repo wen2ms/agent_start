@@ -1,0 +1,32 @@
+[
+    {
+        "title": "Breaking Bad",
+        "rating": 9.5,
+        "country": "United States",
+        "year": 2008
+    },
+    {
+        "title": "Planet Earth II",
+        "rating": 9.4,
+        "country": "United Kingdom",
+        "year": 2016
+    },
+    {
+        "title": "Planet Earth",
+        "rating": 9.4,
+        "country": "United Kingdom",
+        "year": 2006
+    },
+    {
+        "title": "Band of Brothers",
+        "rating": 9.4,
+        "country": "United States",
+        "year": 2001
+    },
+    {
+        "title": "Chernobyl",
+        "rating": 9.3,
+        "country": "United Kingdom",
+        "year": 2019
+    }
+]

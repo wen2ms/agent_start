@@ -1,0 +1,9 @@
+LangChain is a framework for building applications powered by large language models.
+
+Document loaders are used to load data from different sources into LangChain's Document format. This allows applications to process files, web pages, databases, and other data sources in a consistent way.
+
+Text splitters divide large documents into smaller chunks. This is useful because large language models have context limits, and retrieval systems usually work better with smaller pieces of text.
+
+RecursiveCharacterTextSplitter is one of the most commonly used text splitters in LangChain. It tries to keep related pieces of text together while making sure each chunk stays within the configured size.
+
+After splitting documents into chunks, we can generate embeddings for each chunk and store them in a vector database. Later, a retriever can find chunks that are relevant to a user's question.
