@@ -1,6 +1,7 @@
+import json
+
 from openai import OpenAI
 from openai.types.chat import ChatCompletionMessageParam
-import json
 
 schema = [
     "Date",
