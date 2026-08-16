@@ -3,7 +3,9 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
 def csv_load() -> None:
-    loader = CSVLoader(file_path="tv_shows.csv", csv_args={"delimiter": ",", "quotechar": '"'})
+    loader = CSVLoader(
+        file_path="tv_shows.csv", csv_args={"delimiter": ",", "quotechar": '"'}, metadata_columns=("title",)
+    )
     # documents = loader.load()
     for document in loader.lazy_load():
         print(document)
@@ -36,9 +38,9 @@ def pdf_load() -> None:
 
 
 if __name__ == "__main__":
-    # csv_load()
+    csv_load()
 
     # json_load()
 
     # text_load()
-    pdf_load()
+    # pdf_load()

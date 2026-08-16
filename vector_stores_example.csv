@@ -1,0 +1,9 @@
+id,category,title,description
+p001,python,Python decorators,Decorators wrap functions or classes to add behavior without directly modifying their original implementation.
+p002,cpp,C++ RAII,"RAII ties resource lifetime to object lifetime so resources such as memory, files, and locks are released automatically."
+p003,ai,LangChain vector stores,"Vector stores keep embeddings together with documents and metadata, and support semantic similarity search over the stored content."
+p004,ai,Retrieval-Augmented Generation,RAG retrieves relevant documents from a knowledge source and supplies them as context to a language model before generation.
+p005,database,PostgreSQL indexes,Database indexes speed up lookup operations by maintaining structures that help locate rows without scanning the entire table.
+p006,web,HTML DOM,The DOM represents an HTML document as a tree of nodes that JavaScript and browser automation tools can inspect and manipulate.
+p007,automation,Playwright browser automation,"Playwright controls browsers through pages and locators and can automate navigation, clicking, form input, and other browser interactions."
+p008,computer_vision,Perspective correction,Perspective correction transforms a skewed planar object into a normalized front-facing view using a geometric mapping.
