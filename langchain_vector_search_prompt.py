@@ -20,12 +20,12 @@ def format_documents(documents: list[Document]) -> str:
 
 loader = CSVLoader(file_path="tv_shows.csv")
 documents = loader.load()
-embeddings = OpenAIEmbeddings(
+embedding = OpenAIEmbeddings(
     base_url="https://ws-yi9oakgdflk8zstn.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
     model="text-embedding-v4",
     check_embedding_ctx_length=False,
 )
-vector_store = InMemoryVectorStore(embedding=embeddings)
+vector_store = InMemoryVectorStore(embedding=embedding)
 vector_store.add_documents(documents)
 retriever = vector_store.as_retriever(search_kwargs={"k": 3})
 chat_llm = ChatOpenAI(

@@ -9,14 +9,14 @@ loader = CSVLoader(
     content_columns=("title", "description"),
 )
 documents = loader.load()
-embeddings = OpenAIEmbeddings(
+embedding = OpenAIEmbeddings(
     base_url="https://ws-yi9oakgdflk8zstn.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
     model="text-embedding-v4",
     check_embedding_ctx_length=False,
 )
 # vector_store = InMemoryVectorStore(embedding=embeddings)
 vector_store = Chroma(
-    collection_name="vector_stores_exmaple", embedding_function=embeddings, persist_directory="./chroma_db"
+    collection_name="vector_stores_exmaple", embedding_function=embedding, persist_directory="./chroma_db"
 )
 document_ids = [str(document.metadata["id"]) for document in documents]
 added_ids = vector_store.add_documents(documents=documents, ids=document_ids)

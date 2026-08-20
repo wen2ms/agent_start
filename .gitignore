@@ -6,3 +6,7 @@ openai_start_response.md
 chat_histories/
 
 chroma_db/
+md5.txt
+
+# Cache
+__pycache__/

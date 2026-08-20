@@ -82,19 +82,19 @@ def chat() -> None:
 
 
 def embed() -> None:
-    # embeddings = DashScopeEmbeddings(
+    # embedding = DashScopeEmbeddings(
     #     model="text-embedding-v4",
     # )
-    embeddings = OpenAIEmbeddings(
+    embedding = OpenAIEmbeddings(
         base_url="https://ws-yi9oakgdflk8zstn.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
         model="text-embedding-v4",
         check_embedding_ctx_length=False,
     )
     text = "Hello wen2ms!"
-    query_result = embeddings.embed_query(text)
+    query_result = embedding.embed_query(text)
     print(f"The length of text vector: {len(query_result)}")
     texts = ["Hi there!", "Oh, hello!", "What's your name?", "My friends call me World", "Hello World!"]
-    document_result = embeddings.embed_documents(texts)
+    document_result = embedding.embed_documents(texts)
     print(f"The number of texts vectors: {len(document_result)}, the length of text vector: {len(document_result[0])}")
 
 
