@@ -15,7 +15,6 @@ def get_content_hash(content: str, encoding: str = "utf-8") -> str:
 
 class KnowledgeBaseService:
     def __init__(self) -> None:
-        config_data.persist_directory.mkdir(parents=True, exist_ok=True)
         embedding = OpenAIEmbeddings(
             base_url=config_data.embedding_base_url,
             model=config_data.embedding_model,
@@ -24,7 +23,7 @@ class KnowledgeBaseService:
         self.chroma = Chroma(
             collection_name=config_data.collection_name,
             embedding_function=embedding,
-            persist_directory=str(config_data.persist_directory),
+            persist_directory=config_data.persist_directory,
         )
         self.text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=config_data.chunk_size,
@@ -38,7 +37,7 @@ class KnowledgeBaseService:
         first_chunk_id = f"{content_hash}:0"
         existing = self.chroma.get(ids=[first_chunk_id])
         if existing["ids"]:
-            return "[Skipped]Content already exists."
+            return "[Skipped] Content already exists."
         created_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         document = Document(
             page_content=content,
@@ -47,7 +46,7 @@ class KnowledgeBaseService:
         documents = self.text_splitter.split_documents([document])
         ids = [f"{content_hash}:{index}" for index in range(len(documents))]
         self.chroma.add_documents(documents, ids=ids)
-        return "[Success]Content uploaded."
+        return "[Success] Content uploaded."
 
 
 if __name__ == "__main__":

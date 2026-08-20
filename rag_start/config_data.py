@@ -1,12 +1,14 @@
-from pathlib import Path
-
-md5_path = Path("md5.txt")
+max_file_count = 5
+max_single_file_size = 5 * 1024 * 1024
+max_total_file_size = 20 * 1024 * 1024
 
 collection_name = "rag"
-persist_directory = Path("chroma_db")
+persist_directory = "chroma_db"
 
 chunk_size = 1000
 chunk_overlap = 100
 separators = ["\n\n", "\n", ".", "!", "?", " ", ""]
 embedding_base_url = "https://ws-yi9oakgdflk8zstn.cn-beijing.maas.aliyuncs.com/compatible-mode/v1"
 embedding_model = "text-embedding-v4"
+
+retrieval_top_k = 2
