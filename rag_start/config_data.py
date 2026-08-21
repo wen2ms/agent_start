@@ -12,3 +12,6 @@ embedding_base_url = "https://ws-yi9oakgdflk8zstn.cn-beijing.maas.aliyuncs.com/c
 embedding_model = "text-embedding-v4"
 
 retrieval_top_k = 2
+
+chat_base_url = "https://ws-yi9oakgdflk8zstn.cn-beijing.maas.aliyuncs.com/compatible-mode/v1"
+chat_model = "qwen3.7-flash"

@@ -8,10 +8,10 @@ from langchain_core.vectorstores import InMemoryVectorStore
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 
 
-def print_content(prompt: PromptValue) -> PromptValue:
-    print("\n" + "=" * 20 + "Content" + "=" * 20)
-    print(prompt.to_string())
-    return prompt
+def print_content(prompt_value: PromptValue) -> PromptValue:
+    print("\n" + "=" * 20 + "Prompt" + "=" * 20)
+    print(prompt_value.to_string())
+    return prompt_value
 
 
 def format_documents(documents: list[Document]) -> str:
