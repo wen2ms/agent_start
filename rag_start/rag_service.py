@@ -55,7 +55,7 @@ class RagService:
                         "[Source: filename]. "
                     ),
                 ),
-                MessagesPlaceholder("history"),
+                MessagesPlaceholder("history", n_messages=config_data.history_prompt_max_messages),
                 ("user", "Reference data:\n{context}\n\nQuestion:\n{question}"),
             ]
         )
@@ -68,15 +68,15 @@ class RagService:
             | self.chat_llm
             | str_parser
         )
-        conversastion_chain = RunnableWithMessageHistory(
+        conversation_chain = RunnableWithMessageHistory(
             base_chain, get_session_history, input_messages_key="question", history_messages_key="history"
         )
-        return conversastion_chain
+        return conversation_chain
 
 
 if __name__ == "__main__":
-    config: RunnableConfig = {"configurable": {"session_id": "rag001"}}
-
-    response = RagService().chain.invoke(input={"question": "What about a larger one?"}, config=config)
+    response = RagService().chain.invoke(
+        input={"question": "What about a larger one?"}, config=config_data.session_config
+    )
     print("\n" + "=" * 20 + "Answer" + "=" * 20)
     print(response)

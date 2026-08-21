@@ -5,7 +5,7 @@ from knowledge_base import KnowledgeBaseService
 st.title("Knowledge Base Update Service")
 
 uploaded_files = st.file_uploader(
-    label="Upload .txt file",
+    label="Upload .txt files",
     type=["txt"],
     accept_multiple_files=True,
     max_upload_size=config_data.max_single_file_size // (1024 * 1024),
