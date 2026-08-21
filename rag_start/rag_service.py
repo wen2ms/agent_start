@@ -1,9 +1,13 @@
+from operator import itemgetter
+
 import config_data
+from file_history_store import get_session_history
 from langchain_core.documents import Document
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompt_values import PromptValue
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.runnables import Runnable, RunnableParallel, RunnablePassthrough
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_core.runnables import Runnable, RunnableConfig, RunnablePassthrough
+from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from vector_store import VectorStoreService
 
@@ -39,28 +43,40 @@ class RagService:
                     "system",
                     (
                         "You are a retrieval-augmented assistant. "
-                        "Answer the user's question based on the reference data."
+                        "Answer the user's question based on the reference data. "
+                        "Use the chat history only to understand conversational context "
+                        "and follow-up questions. "
+                        "For factual claims, rely on the current reference context rather "
+                        "than previous assistant responses. "
+                        "If the latest user question conflicts with earlier messages, "
+                        "follow the latest user question. "
                         "When using information from the reference context, "
                         "cite the exact source file name in the format "
                         "[Source: filename]. "
                     ),
                 ),
+                MessagesPlaceholder("history"),
                 ("user", "Reference data:\n{context}\n\nQuestion:\n{question}"),
             ]
         )
 
         str_parser = StrOutputParser()
-        chain = (
-            RunnableParallel(context=retriever | format_documents, question=RunnablePassthrough())
+        base_chain = (
+            RunnablePassthrough.assign(context=itemgetter("question") | retriever | format_documents)
             | prompt
             | print_content
             | self.chat_llm
             | str_parser
         )
-        return chain
+        conversastion_chain = RunnableWithMessageHistory(
+            base_chain, get_session_history, input_messages_key="question", history_messages_key="history"
+        )
+        return conversastion_chain
 
 
 if __name__ == "__main__":
-    response = RagService().chain.invoke(input="What size should I choose?")
+    config: RunnableConfig = {"configurable": {"session_id": "rag001"}}
+
+    response = RagService().chain.invoke(input={"question": "What about a larger one?"}, config=config)
     print("\n" + "=" * 20 + "Answer" + "=" * 20)
     print(response)

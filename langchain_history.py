@@ -1,6 +1,6 @@
 import json
+from collections.abc import Sequence
 from pathlib import Path
-from typing import Sequence
 
 from langchain_core.chat_history import BaseChatMessageHistory, InMemoryChatMessageHistory
 from langchain_core.messages import BaseMessage, messages_from_dict, messages_to_dict
@@ -13,16 +13,16 @@ from langchain_openai import ChatOpenAI
 HISTORY_DIR = Path("chat_histories")
 
 
-class FileChatMessagesHistory(BaseChatMessageHistory):
-    def __init__(self, storage_path: Path, session_id: str) -> None:
-        self.storage_path = storage_path
+class FileChatMessageHistory(BaseChatMessageHistory):
+    def __init__(self, history_dir: Path, session_id: str) -> None:
+        self.history_dir = history_dir
         self.session_id = session_id
+        self.history_file = self.history_dir / self.session_id
 
     @property
     def messages(self) -> list[BaseMessage]:
-        storage_path = self.storage_path / self.session_id
         try:
-            data = json.loads(storage_path.read_text())
+            data = json.loads(self.history_file.read_text(encoding="utf-8"))
             return messages_from_dict(data)
         except FileNotFoundError:
             return []
@@ -31,25 +31,23 @@ class FileChatMessagesHistory(BaseChatMessageHistory):
         all_messages = self.messages
         all_messages.extend(messages)
         data = messages_to_dict(all_messages)
-        self.storage_path.mkdir(parents=True, exist_ok=True)
-        storage_path = self.storage_path / self.session_id
-        storage_path.write_text(json.dumps(data, indent=4))
+        self.history_dir.mkdir(parents=True, exist_ok=True)
+        self.history_file.write_text(json.dumps(data, indent=4, ensure_ascii=False), encoding="utf-8")
 
     def clear(self) -> None:
-        self.storage_path.mkdir(parents=True, exist_ok=True)
-        storage_path = self.storage_path / self.session_id
-        storage_path.write_text("[]")
+        self.history_dir.mkdir(parents=True, exist_ok=True)
+        self.history_file.write_text("[]")
 
 
-messages_dict: dict[str, InMemoryChatMessageHistory] = {}
+# messages_dict: dict[str, InMemoryChatMessageHistory] = {}
 
 
 # def get_session_history(session_id: str) -> InMemoryChatMessageHistory:
 #     if session_id not in messages_dict:
 #         messages_dict[session_id] = InMemoryChatMessageHistory()
 #     return messages_dict[session_id]
-def get_session_history(session_id: str) -> FileChatMessagesHistory:
-    return FileChatMessagesHistory(storage_path=HISTORY_DIR, session_id=session_id)
+def get_session_history(session_id: str) -> FileChatMessageHistory:
+    return FileChatMessageHistory(history_dir=HISTORY_DIR, session_id=session_id)
 
 
 def history_demo() -> None:
