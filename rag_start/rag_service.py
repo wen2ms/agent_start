@@ -30,6 +30,7 @@ class RagService:
             base_url=config_data.embedding_base_url,
             model=config_data.embedding_model,
             check_embedding_ctx_length=False,
+            chunk_size=config_data.embedding_batch_size,
         )
         self.vector_store = VectorStoreService(embedding)
         self.chat_llm = ChatOpenAI(base_url=config_data.chat_base_url, model=config_data.chat_model)

@@ -19,6 +19,7 @@ class KnowledgeBaseService:
             base_url=config_data.embedding_base_url,
             model=config_data.embedding_model,
             check_embedding_ctx_length=False,
+            chunk_size=config_data.embedding_batch_size,
         )
         self.chroma = Chroma(
             collection_name=config_data.collection_name,
