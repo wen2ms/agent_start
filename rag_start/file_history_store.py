@@ -70,3 +70,13 @@ def list_conversations() -> list[dict[str, str]]:
         )
     conversations.sort(key=lambda conversation: conversation["updated_at"], reverse=True)
     return conversations
+
+
+def find_empty_conversation() -> str | None:
+    config_data.history_dir.mkdir(parents=True, exist_ok=True)
+    for history_file in config_data.history_dir.iterdir():
+        session_id = history_file.name
+        history = get_session_history(session_id)
+        if not history.messages:
+            return session_id
+    return None

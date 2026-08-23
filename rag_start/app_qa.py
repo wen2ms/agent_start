@@ -1,7 +1,7 @@
 from collections.abc import Iterator
 
 import streamlit as st
-from file_history_store import create_conversation, get_session_history, list_conversations
+from file_history_store import create_conversation, find_empty_conversation, get_session_history, list_conversations
 from langchain_core.messages import AIMessage, HumanMessage
 from langchain_core.runnables import RunnableConfig
 from rag_service import RagService
@@ -13,7 +13,9 @@ def switch_conversation(session_id: str) -> None:
 
 
 def start_new_conversation() -> None:
-    session_id = create_conversation()
+    session_id = find_empty_conversation()
+    if session_id is None:
+        session_id = create_conversation()
     switch_conversation(session_id)
 
 
