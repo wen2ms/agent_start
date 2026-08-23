@@ -1,18 +1,66 @@
 from collections.abc import Iterator
 
-import config_data
 import streamlit as st
-from file_history_store import get_session_history
+from file_history_store import create_conversation, get_session_history, list_conversations
 from langchain_core.messages import AIMessage, HumanMessage
+from langchain_core.runnables import RunnableConfig
 from rag_service import RagService
+
+
+def switch_conversation(session_id: str) -> None:
+    st.session_state["conversation_id"] = session_id
+    st.query_params["conversation_id"] = session_id
+
+
+def start_new_conversation() -> None:
+    session_id = create_conversation()
+    switch_conversation(session_id)
+
 
 st.title("Smart Assistant")
 st.divider()
 
+conversations = list_conversations()
+conversation_ids = {conversation["id"] for conversation in conversations}
+url_session_id = st.query_params.get("conversation_id")
+state_session_id = st.session_state.get("conversation_id")
+
+if url_session_id in conversation_ids:
+    session_id = url_session_id
+elif state_session_id in conversation_ids:
+    session_id = state_session_id
+elif conversations:
+    session_id = conversations[0]["id"]
+else:
+    session_id = create_conversation()
+
+switch_conversation(session_id)
+conversations = list_conversations()
+
 if "rag_service" not in st.session_state:
     st.session_state["rag_service"] = RagService()
 
-session_id = config_data.session_config["configurable"]["session_id"]
+with st.sidebar:
+    st.button("+ New Conversation", on_click=start_new_conversation, width="stretch")
+    st.divider()
+    st.caption("Conversation History")
+    for conversation in conversations:
+        conversation_id = conversation["id"]
+        title = conversation["title"]
+        if conversation_id == session_id:
+            title = f"> {title}"
+        st.button(
+            title,
+            key=f"conversation-{conversation_id}",
+            on_click=switch_conversation,
+            args=(conversation_id,),
+            width="stretch",
+        )
+        st.caption(conversation["updated_at"])
+
+
+session_id = st.session_state["conversation_id"]
+session_config: RunnableConfig = {"configurable": {"session_id": session_id}}
 history = get_session_history(session_id)
 
 st.chat_message("assistant").write("What can I do for you?")
@@ -31,6 +79,6 @@ if prompt:
     st.chat_message("user").write(prompt)
     with st.chat_message("assistant"), st.spinner("Thinking..."):
         stream: Iterator[str] = st.session_state["rag_service"].chain.stream(
-            input={"question": prompt}, config=config_data.session_config
+            input={"question": prompt}, config=session_config
         )
         st.write_stream(stream)

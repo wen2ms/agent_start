@@ -1,7 +1,5 @@
 from pathlib import Path
 
-from langchain_core.runnables import RunnableConfig
-
 max_file_count = 5
 max_single_file_size = 5 * 1024 * 1024
 max_total_file_size = 20 * 1024 * 1024
@@ -23,5 +21,3 @@ chat_model = "qwen3.7-flash"
 
 history_dir = Path("chat_histories")
 history_prompt_max_messages = 10
-
-session_config: RunnableConfig = {"configurable": {"session_id": "rag001"}}

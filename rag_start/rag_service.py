@@ -6,7 +6,7 @@ from langchain_core.documents import Document
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompt_values import PromptValue
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_core.runnables import Runnable, RunnableConfig, RunnablePassthrough
+from langchain_core.runnables import Runnable, RunnablePassthrough
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from vector_store import VectorStoreService
@@ -73,11 +73,3 @@ class RagService:
             base_chain, get_session_history, input_messages_key="question", history_messages_key="history"
         )
         return conversation_chain
-
-
-if __name__ == "__main__":
-    response = RagService().chain.invoke(
-        input={"question": "What about a larger one?"}, config=config_data.session_config
-    )
-    print("\n" + "=" * 20 + "Answer" + "=" * 20)
-    print(response)
