@@ -84,3 +84,4 @@ if prompt:
             input={"question": prompt}, config=session_config
         )
         st.write_stream(stream)
+    st.rerun()
