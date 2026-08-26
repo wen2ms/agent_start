@@ -10,6 +10,7 @@ persist_directory = "chroma_db"
 chunk_size = 1000
 chunk_overlap = 100
 separators = ["\n\n", "\n", "。", "！", "？", "；", "……", ".", "!", "?", " ", ""]
+
 embedding_base_url = "https://ws-yi9oakgdflk8zstn.cn-beijing.maas.aliyuncs.com/compatible-mode/v1"
 embedding_model = "qwen3.7-text-embedding"
 embedding_batch_size = 20
