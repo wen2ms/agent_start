@@ -1,0 +1,178 @@
+# Smart Home Energy Management - Efficiency and Optimization Guide
+
+## Measurement Before Optimization
+
+1. Establish a reliable baseline before claiming savings.
+
+2. Use comparable periods and normalize for billing-period length.
+
+3. Separate whole-home measured energy from device-level estimates.
+
+4. Track weather-sensitive loads separately when possible.
+
+5. Document occupancy changes.
+
+6. Measure major flexible loads such as EV charging separately when possible.
+
+7. Keep solar generation, battery flows, grid import, and export separate.
+
+8. Record automation changes.
+
+9. Mark missing data explicitly.
+
+10. Validate units before combining datasets.
+
+## Heating and Cooling
+
+11. Use schedules that reduce unnecessary conditioning during predictable unoccupied periods.
+
+12. Avoid extreme setpoint changes that create discomfort or interact poorly with controls.
+
+13. Maintain filters and airflow paths according to equipment guidance.
+
+14. Keep thermostat sensors away from direct sun, drafts, and strong local heat sources when possible.
+
+15. Investigate persistent short cycling or unusually long runtime.
+
+16. Seal obvious building-envelope leaks where appropriate.
+
+17. Improve insulation where an assessment identifies deficiencies.
+
+18. Seal and insulate ducts where appropriate.
+
+19. Use shading to reduce unwanted solar heat gain while preserving useful daylight.
+
+20. Treat humidity control as part of comfort and HVAC performance.
+
+## Plug Loads and Appliances
+
+21. Identify devices with meaningful standby consumption before automating shutoff.
+
+22. Use smart plugs for measurement only where ratings and appliance type permit.
+
+23. Group entertainment peripherals on controllable strips when appropriate.
+
+24. Schedule noncritical equipment only when it does not interfere with safety or required operation.
+
+25. Keep refrigerator and freezer door seals in good condition.
+
+26. Maintain appliance ventilation clearance.
+
+27. Use full laundry and dishwasher loads when practical.
+
+28. Use lower-temperature laundry options when appropriate.
+
+29. Air-dry clothes or dishes when practical.
+
+30. Replace equipment based on measured use, condition, total cost, and efficiency - not age alone.
+
+## Lighting
+
+31. Replace frequently used inefficient lamps with efficient LEDs.
+
+32. Use occupancy controls where lights are often left on accidentally.
+
+33. Use daylight when it reduces electric lighting without excessive glare or heat gain.
+
+34. Set sensible occupancy-sensor timeouts.
+
+35. Use compatible dimming where useful.
+
+36. Consolidate overlapping scenes and schedules.
+
+37. Keep manual control available.
+
+38. Audit exterior-lighting schedules seasonally.
+
+## Water Heating
+
+39. Fix hot-water leaks promptly.
+
+40. Reduce unnecessary hot-water use.
+
+41. Use safe water-heater temperature settings.
+
+42. Insulate appropriate hot-water pipes where beneficial.
+
+43. Control recirculation pumps with schedules or demand controls where appropriate.
+
+44. Review long recirculation loops for heat loss.
+
+45. Consider efficient fixtures when they meet user needs.
+
+46. Consider heat-pump water heating where installation conditions are suitable.
+
+## Tariffs and Flexible Loads
+
+47. Understand the utility tariff before optimizing for cost.
+
+48. Shift EV charging when tariff and driving needs make it useful.
+
+49. Stagger flexible high-power loads when demand charges matter.
+
+50. Do not shift loads for insignificant benefit.
+
+51. Use battery schedules that reflect backup, tariff, and lifecycle goals.
+
+52. Keep preheating and precooling within comfort and equipment constraints.
+
+53. Record tariff changes.
+
+54. Analyze cost and energy independently.
+
+## Automation Quality
+
+55. Give each automation a clear purpose.
+
+56. Use explicit triggers and stop conditions.
+
+57. Add hysteresis or delays to noisy thresholds.
+
+58. Define manual override behavior.
+
+59. Define safe behavior when connectivity fails.
+
+60. Prevent conflicting rules.
+
+61. Use occupancy only where sensing is reliable.
+
+62. Test automations in small steps.
+
+63. Log important automation events.
+
+64. Re-evaluate schedules after seasonal or occupancy changes.
+
+## Reporting and AI
+
+65. Separate measured facts from inferred explanations.
+
+66. State data limitations near affected conclusions.
+
+67. Use cautious language for correlations.
+
+68. Do not infer a faulty appliance from whole-home data alone.
+
+69. Do not treat missing values as zero.
+
+70. Avoid unsupported percentage-savings claims.
+
+71. Use daily averages when periods differ.
+
+72. Include weather context for HVAC-heavy comparisons.
+
+73. Rank recommendations by impact, effort, cost, and confidence.
+
+74. Escalate safety-critical issues to qualified professionals.
+
+Reference basis:
+- U.S. Department of Energy, Energy Saver: Tips on Saving Money and Energy in Your Home
+- U.S. Department of Energy, Guide to Home Energy Assessments
+- ENERGY STAR, Smart Home Energy Management Systems
+- ENERGY STAR, Smart Thermostats
+- ENERGY STAR, Home Upgrade
+- ENERGY STAR, Seal and Insulate
+- ENERGY STAR, A Guide to Energy-Efficient Heating and Cooling
+
+Notes:
+- Recommendations are general educational guidance, not a substitute for an on-site energy audit, licensed HVAC/electrical work, or utility-specific tariff advice.
+- Costs, savings, climate effects, and payback periods vary by home, equipment, occupancy, weather, and local utility rates.

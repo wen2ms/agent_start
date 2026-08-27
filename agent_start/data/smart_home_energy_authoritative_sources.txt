@@ -1,0 +1,30 @@
+# Authoritative Reference Sources for a Smart Home Energy RAG Project
+
+1. U.S. Department of Energy - Energy Saver: Tips on Saving Money and Energy in Your Home
+   https://www.energy.gov/sites/default/files/2022-08/energy-saver-guide-2022.pdf
+
+2. U.S. Department of Energy - Guide to Home Energy Assessments
+   https://www.energy.gov/sites/prod/files/guide_to_home_energy_assessments.pdf
+
+3. ENERGY STAR - Smart Home Energy Management Systems
+   https://www.energystar.gov/products/smart_home_energy_mgnt_systems
+
+4. ENERGY STAR - Smart Thermostats
+   https://www.energystar.gov/products/smart_thermostats
+
+5. ENERGY STAR - Smart Home Tips for Saving Energy
+   https://www.energystar.gov/products/smart_home_tips
+
+6. ENERGY STAR - ENERGY STAR Home Upgrade
+   https://www.energystar.gov/products/energy_star_home_upgrade
+
+7. ENERGY STAR - Seal and Insulate
+   https://www.energystar.gov/saveathome/seal_insulate
+
+8. ENERGY STAR - A Guide to Energy-Efficient Heating and Cooling
+   https://www.energystar.gov/sites/default/files/tools/HeatingCoolingGuide%20FINAL_9-4-09.pdf
+
+9. ENERGY STAR - Discussion Guide for Smart Home Energy Management Systems
+   https://www.energystar.gov/sites/default/files/asset/document/ENERGY%20STAR%20Discussion%20Guide%20for%20Smart%20Home%20Energy%20Management%20Systems.pdf
+
+For production RAG, retain source title, publisher, publication or update date when available, and source URL in chunk metadata.

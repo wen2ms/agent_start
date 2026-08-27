@@ -7,14 +7,14 @@ from langchain_core.vectorstores import VectorStoreRetriever
 class VectorStoreService:
     def __init__(self, embedding: Embeddings) -> None:
         self.embedding = embedding
-        self.vector_store = Chroma(
+        self.chorma = Chroma(
             collection_name=config_data.collection_name,
             embedding_function=embedding,
             persist_directory=config_data.persist_directory,
         )
 
     def get_retriever(self) -> VectorStoreRetriever:
-        return self.vector_store.as_retriever(search_kwargs={"k": config_data.retrieval_top_k})
+        return self.chorma.as_retriever(search_kwargs={"k": config_data.retrieval_top_k})
 
 
 if __name__ == "__main__":

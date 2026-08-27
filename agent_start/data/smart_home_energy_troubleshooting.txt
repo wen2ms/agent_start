@@ -1,0 +1,261 @@
+# Smart Home Energy Management - Troubleshooting Guide
+
+Format: Symptom -> Check -> Possible contributors -> Recommended next action.
+
+1. Symptom: Whole-home consumption is much higher than usual
+   Check: Check billing-period length, weather, occupancy, new equipment, and whether the comparison period is truly similar.
+   Possible contributors: HVAC, water heating, EV charging, resistance heating, pumps, or a new always-on load may contribute.
+   Recommended next action: Compare daily and hourly profiles first, then isolate major loads with circuit data or smart plugs.
+
+2. Symptom: Overnight baseload is unexpectedly high
+   Check: Review overnight interval data and all scheduled loads.
+   Possible contributors: EV charging, water heating, HVAC, pool equipment, networking gear, dehumidifiers, or devices left on may contribute.
+   Recommended next action: Disable nonessential loads one group at a time when safe and observe whether the baseline changes.
+
+3. Symptom: A new evening peak appears every day
+   Check: Check whether the peak occurs at the same time and whether multiple appliances start together.
+   Possible contributors: Cooking, laundry, HVAC recovery, water heating, entertainment, and EV charging may overlap.
+   Recommended next action: Stagger flexible loads and verify the effect in interval data.
+
+4. Symptom: HVAC runs for long periods
+   Check: Check weather, thermostat schedule, filter condition, supply and return airflow, doors, windows, and obvious duct problems.
+   Possible contributors: Extreme weather, air leakage, airflow restriction, equipment condition, or an aggressive setpoint may increase runtime.
+   Recommended next action: Correct simple airflow and schedule issues; request HVAC service if comfort remains poor or faults persist.
+
+5. Symptom: HVAC starts and stops very frequently
+   Check: Review thermostat events, filter condition, airflow, and whether the cycling is persistent.
+   Possible contributors: Control issues, airflow problems, equipment sizing, or equipment faults may cause short cycling.
+   Recommended next action: Avoid repeated overrides and arrange professional diagnosis if short cycling continues.
+
+6. Symptom: Smart thermostat does not follow the expected schedule
+   Check: Inspect schedule, hold mode, occupancy features, geofencing, vacation mode, and linked automations.
+   Possible contributors: A manual hold or another automation may be overriding the schedule.
+   Recommended next action: Remove conflicting rules and test one schedule at a time.
+
+7. Symptom: Thermostat temperature seems inaccurate
+   Check: Compare with a reliable thermometer nearby and inspect thermostat location.
+   Possible contributors: Direct sunlight, drafts, nearby registers, appliances, or sensor calibration issues can bias readings.
+   Recommended next action: Correct environmental influences and follow manufacturer calibration guidance if available.
+
+8. Symptom: Energy use rises while the home is unoccupied
+   Check: Check away-mode behavior, water heating, refrigeration, networking, pumps, dehumidification, security, and scheduled equipment.
+   Possible contributors: Background systems may continue operating or an automation may not be entering away mode.
+   Recommended next action: Verify occupancy rules and isolate major background loads.
+
+9. Symptom: Smart plug shows zero energy for an active appliance
+   Check: Check plug status, measurement support, load connection, app permissions, firmware, and units.
+   Possible contributors: Some smart plugs control power but do not meter energy; data may also be delayed.
+   Recommended next action: Confirm the model supports metering and test with a known compatible load.
+
+10. Symptom: Smart plug energy value is implausibly high
+   Check: Check whether the display is watts, watt-hours, kWh, daily energy, or lifetime energy.
+   Possible contributors: Unit confusion, reset errors, duplicated integrations, or bad telemetry may be responsible.
+   Recommended next action: Verify units and compare with a second measurement method.
+
+11. Symptom: Smart meter and home monitor disagree
+   Check: Confirm time windows, import/export treatment, solar generation, measurement points, and intervals.
+   Possible contributors: The systems may measure different electrical boundaries or use different rounding.
+   Recommended next action: Compare the same time range and document what each device measures.
+
+12. Symptom: Solar home shows very low grid use but high appliance use
+   Check: Check whether the report includes onsite generation and export data.
+   Possible contributors: Solar generation may offset grid imports while household consumption remains substantial.
+   Recommended next action: Use consumption, generation, import, and export as separate metrics when available.
+
+13. Symptom: Battery charging creates a large load spike
+   Check: Review battery schedule and charging power.
+   Possible contributors: The battery may be charging from the grid during a configured period.
+   Recommended next action: Adjust the schedule only if tariff, backup, and battery-life goals allow it.
+
+14. Symptom: EV charging dominates monthly electricity use
+   Check: Separate vehicle charging from household loads if possible.
+   Possible contributors: Transportation energy can materially change the home's load profile.
+   Recommended next action: Report EV energy as its own category and optimize schedule based on driving needs and tariff.
+
+15. Symptom: Water-heating use appears unusually high
+   Check: Check hot-water demand, leaks, recirculation schedules, equipment mode, and temperature settings.
+   Possible contributors: Increased hot-water use, recirculation losses, or equipment issues may contribute.
+   Recommended next action: Fix leaks, review schedules, and request service if the heater shows faults or leaks.
+
+16. Symptom: Hot-water recirculation runs continuously
+   Check: Inspect pump schedule or demand-control settings.
+   Possible contributors: Continuous recirculation can increase pump use and pipe heat loss.
+   Recommended next action: Use appropriate scheduling or demand control if supported.
+
+17. Symptom: Refrigerator energy use rises over several weeks
+   Check: Check door seals, ventilation clearance, ambient heat, door-open behavior, and frost or fault indicators.
+   Possible contributors: Longer compressor runtime may result from heat, poor sealing, blocked airflow, or equipment condition.
+   Recommended next action: Follow manufacturer maintenance guidance and seek service for persistent abnormal behavior.
+
+18. Symptom: Dryer cycles are taking much longer
+   Check: Check lint filter, vent airflow, load size, moisture settings, and whether clothes leave the washer unusually wet.
+   Possible contributors: Restricted airflow or larger and wetter loads can increase drying time and energy use.
+   Recommended next action: Clean filters and vents according to manufacturer guidance and service unsafe venting.
+
+19. Symptom: Lighting remains on in empty rooms
+   Check: Review occupancy sensors, timeouts, scenes, schedules, and manual overrides.
+   Possible contributors: Sensor placement or automation conflicts may keep lights on.
+   Recommended next action: Adjust sensor coverage and timeout settings.
+
+20. Symptom: Smart lights turn on unexpectedly
+   Check: Check routines, voice-assistant scenes, geofencing, security automations, and time-zone settings.
+   Possible contributors: Multiple platforms may be controlling the same lights.
+   Recommended next action: Disable overlapping rules and re-enable them one at a time.
+
+21. Symptom: A new constant load appears in whole-home data
+   Check: Note when it first appeared and check newly installed or always-on devices.
+   Possible contributors: Networking equipment, pumps, heaters, electronics, or a changed appliance state may create a new baseload.
+   Recommended next action: Use controlled circuit or plug-level testing instead of guessing the device.
+
+22. Symptom: Energy consumption increased after a firmware update
+   Check: Review release notes, device settings, schedules, and whether default modes changed.
+   Possible contributors: A device may have reset preferences or changed control behavior.
+   Recommended next action: Restore intended settings and compare before and after data.
+
+23. Symptom: An automation repeatedly switches equipment on and off
+   Check: Inspect trigger thresholds, sensor noise, delays, and competing rules.
+   Possible contributors: Missing hysteresis or conflicting triggers can create rapid toggling.
+   Recommended next action: Add delays or wider thresholds and define rule priority.
+
+24. Symptom: Occupancy automation never enters away mode
+   Check: Check presence sensors, geofencing permissions, phone location settings, and household-member logic.
+   Possible contributors: One device may always appear present.
+   Recommended next action: Review each presence source and define a robust all-away condition.
+
+25. Symptom: Occupancy automation enters away mode while someone is home
+   Check: Review sensor coverage and timeout settings.
+   Possible contributors: Insufficient sensing or overly short timeouts may create false vacancy.
+   Recommended next action: Add coverage, increase delay, or combine multiple signals.
+
+26. Symptom: Heat pump auxiliary heat runs often
+   Check: Check outdoor conditions, thermostat behavior, equipment alerts, and whether large setpoint jumps occur.
+   Possible contributors: Cold weather, recovery logic, or equipment issues may increase auxiliary heat use.
+   Recommended next action: Use compatible thermostat settings and request service if behavior seems abnormal.
+
+27. Symptom: Dehumidifier runs almost continuously
+   Check: Check indoor humidity, drainage, filter, setpoint, basement moisture, and outdoor conditions.
+   Possible contributors: High moisture load or an aggressive humidity setpoint can cause long runtimes.
+   Recommended next action: Address moisture sources and use a reasonable humidity target.
+
+28. Symptom: Energy use is high only on very hot days
+   Check: Compare HVAC runtime with outdoor temperature and humidity.
+   Possible contributors: Cooling demand often rises with hotter or more humid conditions.
+   Recommended next action: Check shading, air sealing, thermostat schedule, filters, and HVAC performance.
+
+29. Symptom: Energy use is high only on very cold days
+   Check: Check heating system type, backup heat, thermostat changes, and building leakage.
+   Possible contributors: Heating demand and auxiliary heat can increase in cold conditions.
+   Recommended next action: Improve envelope performance and ensure equipment is operating correctly.
+
+30. Symptom: One circuit shows continuous high power
+   Check: Identify all loads on the circuit and verify meter configuration.
+   Possible contributors: A heater, pump, appliance, or wiring issue may be responsible.
+   Recommended next action: If the load cannot be identified safely, use a qualified electrician.
+
+31. Symptom: Breaker trips coincide with high energy use
+   Check: Stop repeated resetting and identify connected loads.
+   Possible contributors: Overload, short circuit, equipment fault, or wiring problems may be present.
+   Recommended next action: Treat as an electrical safety issue and use a qualified electrician.
+
+32. Symptom: Burning smell or overheated plug is observed
+   Check: Disconnect power if it can be done safely and stop using the affected equipment.
+   Possible contributors: A connection or equipment fault may be overheating.
+   Recommended next action: Treat as a safety issue and obtain qualified electrical service.
+
+33. Symptom: Energy data has gaps
+   Check: Check connectivity, gateway status, account authorization, and meter reporting interval.
+   Possible contributors: Network or data-service interruptions may have prevented collection.
+   Recommended next action: Mark the period as missing rather than zero.
+
+34. Symptom: Two integrations duplicate the same device
+   Check: Inspect device IDs and integration sources.
+   Possible contributors: The same telemetry may be ingested twice.
+   Recommended next action: Deduplicate before calculating totals.
+
+35. Symptom: Monthly total does not equal the sum of device totals
+   Check: Check device coverage, unmonitored circuits, solar, battery flows, and time alignment.
+   Possible contributors: Device-level monitoring rarely covers every household load.
+   Recommended next action: Use the intended authoritative whole-home meter as the reference.
+
+36. Symptom: Daily total differs from hourly sum
+   Check: Check time zone, daylight-saving changes, missing intervals, rounding, and aggregation rules.
+   Possible contributors: Aggregation boundaries may differ.
+   Recommended next action: Normalize timestamps before comparison.
+
+37. Symptom: Cost rises while kWh stays similar
+   Check: Compare tariff, time-of-use distribution, fixed charges, demand charges, and billing rules.
+   Possible contributors: Cost can change without much change in total energy.
+   Recommended next action: Do not infer higher consumption from a higher bill alone.
+
+38. Symptom: Peak demand is high but monthly kWh is normal
+   Check: Look for short intervals when several high-power loads overlap.
+   Possible contributors: Simultaneous HVAC, cooking, EV charging, water heating, or drying can create a high peak.
+   Recommended next action: Stagger flexible high-power loads if the tariff rewards lower demand.
+
+39. Symptom: Weather-based automation behaves strangely
+   Check: Check location, time zone, weather source, forecast horizon, and fallback behavior.
+   Possible contributors: Incorrect location or stale weather data can trigger inappropriate actions.
+   Recommended next action: Validate inputs and define safe fallback rules.
+
+40. Symptom: Home energy report claims a specific appliance is faulty without device data
+   Check: Inspect the evidence used for the conclusion.
+   Possible contributors: Whole-home data may show an anomaly but not prove the responsible appliance.
+   Recommended next action: Rewrite the report to state the anomaly and recommend verification steps.
+
+41. Symptom: Energy savings claim looks too precise
+   Check: Check whether the calculation has a valid baseline and measured post-change data.
+   Possible contributors: Generic percentage claims may not apply to the specific home.
+   Recommended next action: Use cautious language unless defensible measurements exist.
+
+42. Symptom: Comparison uses periods of different lengths
+   Check: Normalize by daily average and review weather and occupancy.
+   Possible contributors: Different period lengths distort raw totals.
+   Recommended next action: Use comparable intervals before drawing conclusions.
+
+43. Symptom: Comparison crosses a major occupancy change
+   Check: Document travel, guests, remote work, or vacancy.
+   Possible contributors: Occupancy can materially alter appliance, HVAC, and hot-water use.
+   Recommended next action: Avoid attributing all change to efficiency measures.
+
+44. Symptom: Solar export suddenly drops
+   Check: Check weather, shading, inverter status, monitoring connection, and whether daytime household use increased.
+   Possible contributors: Lower export can result from lower generation or higher self-consumption.
+   Recommended next action: Analyze generation and load separately.
+
+45. Symptom: EV is not charging during the scheduled window
+   Check: Check vehicle state, charger connectivity, utility program, departure-time settings, and competing schedules.
+   Possible contributors: The car, charger, or utility integration may be controlling the session.
+   Recommended next action: Choose one primary scheduler when possible.
+
+46. Symptom: Automation stops after internet outage
+   Check: Check which rules execute locally and which depend on cloud services.
+   Possible contributors: Cloud-dependent automations may fail without internet access.
+   Recommended next action: Use safe local fallbacks for critical control where supported.
+
+47. Symptom: Energy report contains negative consumption values
+   Check: Check import/export sign conventions, solar and battery flows, sensor orientation, and processing.
+   Possible contributors: Negative values may represent export or a configuration error.
+   Recommended next action: Document sign conventions before aggregating.
+
+48. Symptom: Room is uncomfortable after aggressive energy-saving changes
+   Check: Review temperature setbacks, schedules, ventilation, humidity, and occupancy assumptions.
+   Possible contributors: The optimization may be too aggressive for the home's thermal response.
+   Recommended next action: Prioritize comfort and safety, then tune settings gradually.
+
+49. Symptom: Home remains drafty after adding insulation
+   Check: Check whether air leakage was addressed and whether insulation was installed continuously.
+   Possible contributors: Insulation alone may not stop uncontrolled airflow.
+   Recommended next action: Consider a professional energy assessment or targeted air-leak testing.
+
+Reference basis:
+- U.S. Department of Energy, Energy Saver: Tips on Saving Money and Energy in Your Home
+- U.S. Department of Energy, Guide to Home Energy Assessments
+- ENERGY STAR, Smart Home Energy Management Systems
+- ENERGY STAR, Smart Thermostats
+- ENERGY STAR, Home Upgrade
+- ENERGY STAR, Seal and Insulate
+- ENERGY STAR, A Guide to Energy-Efficient Heating and Cooling
+
+Notes:
+- Recommendations are general educational guidance, not a substitute for an on-site energy audit, licensed HVAC/electrical work, or utility-specific tariff advice.
+- Costs, savings, climate effects, and payback periods vary by home, equipment, occupancy, weather, and local utility rates.

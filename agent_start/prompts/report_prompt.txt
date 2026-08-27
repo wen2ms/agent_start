@@ -130,8 +130,6 @@ When recommending equipment changes:
 
 # Output Format
 
-Respond in English only.
-
 Use Markdown.
 
 Required title:

@@ -1,0 +1,10 @@
+collection_name: agent
+persist_directory: "chroma_db"
+retrieval_top_k: 3
+
+data_dir: "data"
+allowed_knowledge_types: [".txt", ".pdf"]
+
+chunk_size: 1000
+chunk_overlap: 100
+separators: ["\n\n", "\n", "。", "！", "？", "；", "……", ".", "!", "?", " ", ""]

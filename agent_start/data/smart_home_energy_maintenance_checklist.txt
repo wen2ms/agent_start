@@ -1,0 +1,156 @@
+# Smart Home Energy Management - Maintenance and Seasonal Checklist
+
+## Regular Checks
+
+1. Review the dashboard for unexplained spikes or sustained baseload changes.
+
+2. Check thermostat schedules against current occupancy.
+
+3. Confirm major automations are not conflicting.
+
+4. Review smart-plug schedules for obsolete rules.
+
+5. Check HVAC filter condition as required by equipment and environment.
+
+6. Keep supply and return airflow paths unobstructed.
+
+7. Review hot-water recirculation schedules if present.
+
+8. Check EV charging schedule against current driving needs.
+
+9. Verify solar, battery, and energy-monitor gateways are online.
+
+10. Investigate repeated device disconnects rather than ignoring missing data.
+
+## Monthly Checks
+
+11. Compare daily average energy use with a comparable prior period.
+
+12. Review overnight baseload.
+
+13. Review recurring peak intervals.
+
+14. Document new devices that changed the load profile.
+
+15. Export or back up data when retention is limited.
+
+16. Review account security and remove unused integrations.
+
+17. Check trusted firmware updates.
+
+18. Review automation logs for repeated failures.
+
+19. Inspect accessible weather stripping and obvious air leaks.
+
+20. Check accessible plumbing for hot-water leaks.
+
+## Heating-Season Preparation
+
+21. Service heating equipment when required.
+
+22. Clean or replace HVAC filters as required.
+
+23. Confirm thermostat schedules and heat-pump settings.
+
+24. Clear supply and return vents.
+
+25. Inspect accessible duct connections for damage.
+
+26. Check door and window weather stripping.
+
+27. Inspect attic-hatch sealing where accessible.
+
+28. Review winter humidity and ventilation strategy.
+
+29. Test freeze-protection or minimum-temperature rules.
+
+30. Verify backup-power priorities if winter outages are a concern.
+
+## Cooling-Season Preparation
+
+31. Check cooling-system maintenance needs before peak weather.
+
+32. Clean or replace filters as required.
+
+33. Confirm thermostat cooling schedules.
+
+34. Review shading schedules for hot exposures.
+
+35. Keep outdoor HVAC equipment clear as specified by the manufacturer.
+
+36. Review dehumidifier settings and drainage.
+
+37. Inspect window and door sealing.
+
+38. Review time-of-use schedules before high summer prices when applicable.
+
+39. Verify safe temperature limits for vulnerable occupants.
+
+40. Check that weather-based automations use the correct location.
+
+## Smart Device and Data Maintenance
+
+41. Use unique credentials and multifactor authentication where available.
+
+42. Remove integrations that are no longer used.
+
+43. Keep routers and smart-home hubs updated.
+
+44. Prefer supported devices that still receive security updates.
+
+45. Document which automations depend on cloud services.
+
+46. Test manual control for critical devices.
+
+47. Check battery-powered sensors before relying on occupancy automation.
+
+48. Review geofencing permissions after phone or OS changes.
+
+49. Do not silently fill missing energy intervals with zero.
+
+50. Document meter resets or replacements.
+
+51. Keep unit conversions consistent.
+
+52. Check for duplicate devices after integration changes.
+
+53. Record solar and battery sign conventions.
+
+54. Verify daily totals against interval sums periodically.
+
+55. Keep tariff versions and effective dates with cost calculations.
+
+## Professional Service Triggers
+
+56. Repeated breaker trips.
+
+57. Burning smell, hot outlets, or discolored electrical connections.
+
+58. Gas or combustion concerns.
+
+59. Refrigerant or HVAC safety concerns.
+
+60. Leaking water-heater tank.
+
+61. Persistent HVAC short cycling or failure to maintain safe temperature.
+
+62. Major unexplained continuous loads that cannot be isolated safely.
+
+63. Electrical panel or circuit work requiring qualified service.
+
+64. Structural, moisture, or mold problems found during envelope work.
+
+65. Any energy-saving change that would bypass equipment safety controls.
+
+Reference basis:
+- U.S. Department of Energy, Energy Saver: Tips on Saving Money and Energy in Your Home
+- U.S. Department of Energy, Guide to Home Energy Assessments
+- ENERGY STAR, Smart Home Energy Management Systems
+- ENERGY STAR, Smart Thermostats
+- ENERGY STAR, Home Upgrade
+- ENERGY STAR, Seal and Insulate
+- ENERGY STAR, A Guide to Energy-Efficient Heating and Cooling
+
+Notes:
+- Recommendations are general educational guidance, not a substitute for an on-site energy audit, licensed HVAC/electrical work, or utility-specific tariff advice.
+- Costs, savings, climate effects, and payback periods vary by home, equipment, occupancy, weather, and local utility rates.
