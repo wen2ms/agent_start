@@ -57,7 +57,7 @@ class RagService:
                     ),
                 ),
                 MessagesPlaceholder("history", n_messages=config_data.history_prompt_max_messages),
-                ("user", "Reference data:\n{context}\n\nQuestion:\n{question}"),
+                ("human", "Reference data:\n{context}\n\nQuestion:\n{question}"),
             ]
         )
 

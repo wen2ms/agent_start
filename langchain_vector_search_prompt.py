@@ -38,7 +38,7 @@ prompt = ChatPromptTemplate.from_messages(
             ("You are a TV show recommendation assistant. Answer the user's question based on the reference data."),
         ),
         (
-            "user",
+            "human",
             ("Reference data:\n{context}\n\nQuestion:\n{question}"),
         ),
     ]
