@@ -1,0 +1,3 @@
+user_id,account_id,city,timezone
+user_001,ACC10001,Shanghai,Asia/Shanghai
+user_002,ACC10002,San Francisco,America/Los_Angeles

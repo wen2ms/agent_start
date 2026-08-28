@@ -1,0 +1,2 @@
+users_csv_path: "data/users.csv"
+energy_usage_csv_path: "data/energy_usage.csv"
