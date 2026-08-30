@@ -5,6 +5,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import Runnable, RunnableParallel, RunnablePassthrough
 from model.factory import chat_llm
 from rag.vector_store import VectorStoreService
+from utils.logger_handler import logger
 from utils.prompt_loader import PromptKey, load_prompt
 
 
@@ -15,8 +16,7 @@ def format_documents(documents: list[Document]) -> str:
 
 
 def print_content(prompt_value: PromptValue) -> PromptValue:
-    print("\n" + "=" * 20 + "Prompt" + "=" * 20)
-    print(prompt_value.to_string())
+    logger.debug(prompt_value.to_string())
     return prompt_value
 
 

@@ -1,28 +1,31 @@
 import csv
-from dataclasses import dataclass
+from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
 
 import requests
+from agent.context import UserContext
 from langchain.tools import ToolRuntime, tool
 from rag.rag_summarize import RagSummarizeService
-from utils.config_handler import rag_config
-
-
-@dataclass
-class UserContext:
-    user_id: str
+from utils.config_handler import agent_config
 
 
 def _get_user(user_id: str, encoding: str = "utf-8") -> dict[str, str] | None:
-    with Path(rag_config["users_csv_path"]).open("r", encoding=encoding, newline="") as infile:
+    with Path(agent_config["users_csv_path"]).open("r", encoding=encoding, newline="") as infile:
         reader = csv.DictReader(infile)
         for row in reader:
             if row["user_id"] == user_id:
                 return row
     return None
+
+
+def _validate_month(month: str) -> None:
+    try:
+        datetime.strptime(month, "%Y-%m")
+    except ValueError as exc:
+        raise ValueError("month must use YYYY-MM format") from exc
 
 
 def _weather_code_to_description(code: int) -> str:
@@ -56,8 +59,8 @@ _rag_summarize_service = RagSummarizeService()
 
 
 @tool(description="Search the trusted residential energy-management knowledge base.")
-def energy_knowledge_search(question: str) -> str:
-    return _rag_summarize_service.summarize(question)
+def energy_knowledge_search(query: str) -> str:
+    return _rag_summarize_service.summarize(query)
 
 
 @tool(description="Return the current user's city or service region.")
@@ -94,7 +97,7 @@ def get_current_month(runtime: ToolRuntime[UserContext]) -> str:
 
 
 @tool(description="Return current weather conditions for a specific city.")
-def get_current_weather(city: str) -> dict[str, Any]:
+def get_weather(city: str) -> dict[str, Any]:
     geocoding_response = requests.get(
         "https://geocoding-api.open-meteo.com/v1/search",
         params={"name": city, "count": 1, "language": "en", "format": "json"},
@@ -138,11 +141,84 @@ def get_current_weather(city: str) -> dict[str, Any]:
     }
 
 
+@tool(description="Prepare the context required to generate a home-energy report.")
+def prepare_energy_report_context() -> str:
+    return "Energy report context prepared successfully."
+
+
+@tool(description="Retrieve household energy-usage data for an account and month.")
+def fetch_energy_usage(account_id: str, month: str, runtime: ToolRuntime[UserContext]) -> dict[str, Any]:
+    if not runtime.context.report:
+        return {"error": ("Energy report context has not been prepared. Call prepare_energy_report_context first.")}
+    _validate_month(month)
+    user = _get_user(runtime.context.user_id)
+    if user is None:
+        return {"status": "error", "message": "Current user is unavailable."}
+    current_user_account_id = user.get("account_id", "").strip()
+    if not current_user_account_id:
+        return {"status": "error", "message": "Current user has no energy account."}
+    if account_id != current_user_account_id:
+        return {"status": "error", "message": "The requested account does not belong to the current user."}
+
+    total_kwh = 0.0
+    record_count = 0
+    daily_usage: defaultdict[str, float] = defaultdict(float)
+    category_usage: defaultdict[str, float] = defaultdict(float)
+    device_usage: defaultdict[str, float] = defaultdict(float)
+    with Path(agent_config["energy_usage_csv_path"]).open("r", encoding="utf-8", newline="") as infile:
+        reader = csv.DictReader(infile)
+        for row in reader:
+            if row["account_id"] != account_id:
+                continue
+            timestamp = row["timestamp"]
+            if not timestamp.startswith(month):
+                continue
+            energy_kwh = float(row["energy_kwh"])
+            category = row.get("category", "unknown").strip()
+            device_name = row.get("device_name", "unknown").strip()
+            date = timestamp[:10]
+            total_kwh += energy_kwh
+            daily_usage[date] += energy_kwh
+            category_usage[category] += energy_kwh
+            device_usage[device_name] += energy_kwh
+            record_count += 1
+    if record_count == 0:
+        return {
+            "account_id": account_id,
+            "month": month,
+            "data_available": False,
+            "message": "No energy-usage records were found for this account and month.",
+        }
+    return {
+        "account_id": account_id,
+        "month": month,
+        "data_available": True,
+        "record_count": record_count,
+        "total_kwh": round(total_kwh, 3),
+        "daily_usage_kwh": {date: round(value, 3) for date, value in sorted(daily_usage.items())},
+        "category_usage_kwh": {category: round(value, 3) for category, value in sorted(category_usage.items())},
+        "device_usage_kwh": {
+            device: round(value, 3)
+            for device, value in sorted(device_usage.items(), key=lambda item: item[1], reverse=True)
+        },
+    }
+
+
+TOOLS = [
+    energy_knowledge_search,
+    get_user_location,
+    get_weather,
+    get_account_id,
+    get_current_month,
+    prepare_energy_report_context,
+    fetch_energy_usage,
+]
+
 if __name__ == "__main__":
     print("\n" + "=" * 20 + "Knowledge Search" + "=" * 20)
-    result = energy_knowledge_search.invoke({"question": "How can I reduce air conditioning energy consumption?"})
+    result = energy_knowledge_search.invoke({"query": "How can I reduce air conditioning energy consumption?"})
     print(result)
 
     print("\n" + "=" * 20 + "Weather" + "=" * 20)
-    result = get_current_weather.invoke({"city": "Shanghai"})
+    result = get_weather.invoke({"city": "Shanghai"})
     print(result)
