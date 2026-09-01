@@ -24,12 +24,6 @@ if prompt:
     response_messages: list[str] = []
     with st.chat_message("assistant"), st.spinner("Thinking..."):
         stream: Iterator[str] = st.session_state["agent"].execute_stream(query=prompt, user_id="user_001")
-
-        def capture(generator: Iterator[str], cache_list: list) -> Iterator[str]:
-            for chunk in generator:
-                cache_list.append(chunk)
-                yield chunk
-
-        st.write_stream(capture(stream, response_messages))
-        st.session_state["messages"].append({"role": "assistant", "content": response_messages[-1]})
+        response = st.write_stream(stream)
+        st.session_state["messages"].append({"role": "assistant", "content": response})
     st.rerun()

@@ -20,10 +20,9 @@ class ReactAgent:
     def execute_stream(self, query: str, user_id: str) -> Iterator[str]:
         agent_input: InputAgentState = {"messages": [{"role": "user", "content": query}]}
         context = UserContext(user_id=user_id)
-        for state in self.agent.stream(input=agent_input, context=context, stream_mode="values"):
-            latest_message = state["messages"][-1]
-            if latest_message.content:
-                yield latest_message.content + "\n"
+        for chunk, metadata in self.agent.stream(input=agent_input, context=context, stream_mode="messages"):
+            if metadata["langgraph_node"] == "model" and chunk.text:
+                yield chunk.text
 
 
 if __name__ == "__main__":
